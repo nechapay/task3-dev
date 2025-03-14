@@ -5,27 +5,32 @@ const questions = ref([
   {
     i: 1,
     a: 'We do our physical training',
-    value: ['do', 'physical', 'We', 'training', 'our']
+    value: ['do', 'physical', 'We', 'training', 'our'],
+    s: false
   },
   {
     i: 2,
     a: 'We line up for the morning inspection',
-    value: ['inspection', 'for', 'We', 'morning', 'the', 'line', 'up']
+    value: ['inspection', 'for', 'We', 'morning', 'the', 'line', 'up'],
+    s: false
   },
   {
     i: 3,
     a: 'We have our meals four times a day',
-    value: ['have', 'our', 'We', 'a', 'day', 'four', 'meals', 'times']
+    value: ['have', 'our', 'We', 'a', 'day', 'four', 'meals', 'times'],
+    s: false
   },
   {
     i: 4,
     a: 'Cadets have three hours of self-preparation and one hour of clubs',
-    value: ['three', 'hours', 'Cadets', 'of', 'self-preparation', 'of', 'clubs', 'and', 'have', 'one', 'hour']
+    value: ['three', 'hours', 'Cadets', 'of', 'self-preparation', 'of', 'clubs', 'and', 'have', 'one', 'hour'],
+    s: false
   },
   {
     i: 5,
     a: 'After the signal “lights out”, we go to bed',
-    value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed']
+    value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
+    s: false
   }
 ])
 
@@ -41,6 +46,7 @@ function getResult() {
   let res = true
   questions.value.forEach((item) => {
     let str = item.value.join(' ')
+    item.s = item.a === str
     if (item.a !== str) {
       res = false
     }
@@ -51,7 +57,12 @@ function getResult() {
 
 <template>
   <div class="fill d-flex flex-column wrapper">
-    <div v-for="(item, idx) in questions" :key="item.i" class="d-flex flex-column">
+    <div
+      v-for="(item, idx) in questions"
+      :key="item.i"
+      class="d-flex flex-column"
+      :class="{ solution: isSolved, green: item.s }"
+    >
       <draggable class="sortable-list list-group" v-model="item.value" group="people" ghost-class="ghost" item-key="id">
         <template #item="{ element, index }" :key="index">
           <div class="word">
@@ -164,5 +175,17 @@ function getResult() {
 
 .result {
   margin: 20px;
+}
+
+.solution {
+  padding: 0px 16px;
+  border: 3px dashed red;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  transition-duration: 1s;
+}
+
+.solution.green {
+  border-color: green;
 }
 </style>
