@@ -4,33 +4,38 @@ import { ref } from 'vue'
 const questions = ref([
   {
     i: 1,
-    a: 'We do our physical training',
-    value: ['do', 'physical', 'We', 'training', 'our'],
-    s: false
+    a: 'We don’t do our physical training',
+    value: ['do', 'physical', 'We', 'training', 'our', 'don’t'],
+    s: false,
+    after: '.'
   },
   {
     i: 2,
-    a: 'We line up for the morning inspection',
-    value: ['inspection', 'for', 'We', 'morning', 'the', 'line', 'up'],
-    s: false
+    a: 'When do you line up for the morning inspection',
+    value: ['you', 'inspection', 'for', 'When', 'morning', 'the', 'line', 'up', 'do'],
+    s: false,
+    after: '?'
   },
   {
     i: 3,
-    a: 'We have our meals four times a day',
-    value: ['have', 'our', 'We', 'a', 'day', 'four', 'meals', 'times'],
-    s: false
+    a: 'He has his meals four times a day',
+    value: ['has', 'his', 'He', 'a', 'day', 'four', 'meals', 'times'],
+    s: false,
+    after: '.'
   },
   {
     i: 4,
     a: 'Cadets have three hours of self-preparation and one hour of clubs',
     value: ['three', 'hours', 'Cadets', 'of', 'self-preparation', 'of', 'clubs', 'and', 'have', 'one', 'hour'],
-    s: false
+    s: false,
+    after: '.'
   },
   {
     i: 5,
     a: 'After the signal “lights out”, we go to bed',
     value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
-    s: false
+    s: false,
+    after: '.'
   }
 ])
 
@@ -66,7 +71,7 @@ function getResult() {
       <draggable class="sortable-list list-group" v-model="item.value" group="people" ghost-class="ghost" item-key="id">
         <template #item="{ element, index }" :key="index">
           <div class="word">
-            {{ element }}
+            {{ index < item.value.length - 1 ? element.replace('.', ',') : element.replace(',', '') + item.after }}
           </div>
         </template>
       </draggable>
@@ -86,7 +91,7 @@ function getResult() {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgb(171, 202, 135);
+  background: rgb(201 202 135);
   font-size: 200%;
 }
 .fill {
