@@ -1,39 +1,60 @@
 <script setup>
 import draggable from 'vuedraggable'
 import { ref } from 'vue'
+import _ from 'lodash'
+
 const questions = ref([
   {
     i: 1,
-    a: 'We don’t do our physical training',
-    value: ['do', 'physical', 'We', 'training', 'our', 'don’t'],
+    // a: 'We don’t do our physical training',
+    // value: ['do', 'physical', 'We', 'training', 'our', 'don’t'],
+    a: 'Alexander Suvorov was a famous Russian general',
+    value: ['famous', 'was', 'Alexander', 'a', 'Suvorov', 'general', 'Russian'],
     s: false,
     after: '.'
   },
   {
     i: 2,
-    a: 'When do you line up for the morning inspection',
-    value: ['you', 'inspection', 'for', 'When', 'morning', 'the', 'line', 'up', 'do'],
+    // a: 'When do you line up for the morning inspection',
+    // value: ['you', 'inspection', 'for', 'When', 'morning', 'the', 'line', 'up', 'do'],
+    a: 'He thought that a strong body was important for a strong mind',
+    value: ['body', 'was', 'thought', 'strong', 'a', 'that', 'important', 'a', 'He', 'for', 'mind', 'strong'],
     s: false,
     after: '?'
   },
   {
     i: 3,
-    a: 'He has his meals four times a day',
-    value: ['has', 'his', 'He', 'a', 'day', 'four', 'meals', 'times'],
+    // a: 'He has his meals four times a day',
+    // value: ['has', 'his', 'He', 'a', 'day', 'four', 'meals', 'times'],
+    a: 'Suvorov started his day early',
+    value: ['his', 'Suvorov', 'day', 'early', 'started'],
     s: false,
     after: '.'
   },
   {
     i: 4,
-    a: 'Cadets have three hours of self-preparation and one hour of clubs',
-    value: ['three', 'hours', 'Cadets', 'of', 'self-preparation', 'of', 'clubs', 'and', 'have', 'one', 'hour'],
+    // a: 'Cadets have three hours of self-preparation and one hour of clubs',
+    // value: ['three', 'hours', 'Cadets', 'of', 'self-preparation', 'of', 'clubs', 'and', 'have', 'one', 'hour'],
+    a: 'He ate good food, like meat and vegetables',
+    value: ['food,', 'He', 'like', 'vegetables', 'ate', 'good', 'and', 'meat'],
     s: false,
     after: '.'
   },
   {
     i: 5,
-    a: 'After the signal “lights out”, we go to bed',
-    value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
+    // a: 'After the signal “lights out”, we go to bed',
+    // value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
+    a: 'He worked, did exercises, and rested',
+    value: ['and', 'exercises,', 'rested', 'did', 'worked', 'He'],
+    s: false,
+    after: '.'
+  },
+  {
+    i: 6,
+    // a: 'After the signal “lights out”, we go to bed',
+    // value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
+    a: 'A healthy life and a good daily routine can help you be successful',
+    value: ['life', 'daily', 'good', 'help', 'a', 'you', 'and', 'healthy', 'can', 'A', 'successful', 'routine', 'be'],
     s: false,
     after: '.'
   }
@@ -50,7 +71,7 @@ function checkClick() {
 function getResult() {
   let res = true
   questions.value.forEach((item) => {
-    let str = item.value.join(' ')
+    let str = item.value.join(', ')
     item.s = item.a === str
     if (item.a !== str) {
       res = false
@@ -75,6 +96,7 @@ function getResult() {
           </div>
         </template>
       </draggable>
+      <!-- <div>{{ _.shuffle(item.value) }}</div> -->
     </div>
     <div class="d-flex flex-column">
       <div class="result" v-if="isSolved">
