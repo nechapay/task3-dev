@@ -53,8 +53,8 @@ const questions = ref([
     i: 6,
     // a: 'After the signal “lights out”, we go to bed',
     // value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
-    a: 'A good daily routine can help you be successful',
-    value: ['daily', 'good', 'help', 'you', 'can', 'A', 'successful', 'routine', 'be'],
+    a: 'A good daily routine can help you to be successful',
+    value: ['daily', 'good', 'help', 'to', 'you', 'can', 'A', 'successful', 'routine', 'be'],
     s: false,
     after: '.'
   }
