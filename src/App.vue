@@ -20,7 +20,7 @@ const questions = ref([
     a: 'He thought that a strong body was important for a strong mind',
     value: ['body', 'was', 'thought', 'strong', 'a', 'that', 'important', 'a', 'He', 'for', 'mind', 'strong'],
     s: false,
-    after: '?'
+    after: '.'
   },
   {
     i: 3,
@@ -53,8 +53,8 @@ const questions = ref([
     i: 6,
     // a: 'After the signal “lights out”, we go to bed',
     // value: ['we', 'to', 'the', 'signal', 'After', '“lights out”,', 'go', 'bed'],
-    a: 'A healthy life and a good daily routine can help you be successful',
-    value: ['life', 'daily', 'good', 'help', 'a', 'you', 'and', 'healthy', 'can', 'A', 'successful', 'routine', 'be'],
+    a: 'A good daily routine can help you be successful',
+    value: ['daily', 'good', 'help', 'you', 'can', 'A', 'successful', 'routine', 'be'],
     s: false,
     after: '.'
   }
@@ -71,7 +71,7 @@ function checkClick() {
 function getResult() {
   let res = true
   questions.value.forEach((item) => {
-    let str = item.value.join(', ')
+    let str = item.value.join(' ')
     item.s = item.a === str
     if (item.a !== str) {
       res = false
